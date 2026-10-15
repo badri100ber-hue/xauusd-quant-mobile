@@ -26,7 +26,7 @@ self.addEventListener("fetch", event => {
   const scopePath = new URL(self.registration.scope).pathname;
   if (!url.pathname.startsWith(scopePath)) return;
   const relativePath = decodeURIComponent(url.pathname.slice(scopePath.length));
-  // Never cache dynamic trading data: cache only the app shell allowlist below.
+  // Never cache dynamic trading data: /mobile/snapshot, /market, /health, /history, /dashboard/snapshot. Cache only the app shell allowlist below.
   if (!SHELL_FILES.has(relativePath) || url.search) return;
 
   event.respondWith((async () => {
